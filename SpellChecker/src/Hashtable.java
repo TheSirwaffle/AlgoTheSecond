@@ -73,13 +73,23 @@ public class Hashtable<K, V> {
 		Entry<K,V> previous = null;
 		Entry<K,V> current = values[hash];
 		V result = null;
-		while(current.next != null)
+		if(current != null)
 		{
-			previous = current;
-			current = current.next;
+			while(current.next != null)
+			{
+				previous = current;
+				current = current.next;
+			}
+			result = current.data;
+			if(previous != null)
+			{
+				previous.next = null;
+			}
+			else
+			{
+				values[hash] = null;
+			}
 		}
-		result = current.data;
-		previous.next = null;
 		return result;
 	}
 	
